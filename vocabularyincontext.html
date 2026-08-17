@@ -1,0 +1,394 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Vocabulary in Context | CEFR Reading Curriculum</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",Arial}
+body{
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color:#e8f6ff;
+}
+
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 28px;
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(12px);
+}
+header .left{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+header img{height:70px}
+header h1{color:#4fd1ff;font-size:22px}
+header h1 small{font-size:13px;color:#a0e7ff;font-weight:normal;display:block;margin-top:2px;}
+
+/* NAV */
+nav{
+  text-align:center;
+  padding:12px;
+  background:rgba(0,0,0,.55);
+}
+nav button{
+  width:190px;
+  margin:6px;
+  padding:10px;
+  border-radius:14px;
+  border:1px solid #4fd1ff;
+  background:transparent;
+  color:#4fd1ff;
+  cursor:pointer;
+  transition:.3s;
+}
+nav button:hover{
+  background:#4fd1ff;
+  color:#000;
+}
+
+/* FRAME */
+.frame{
+  max-width:1200px;
+  margin:30px auto;
+  padding:26px;
+  background:rgba(0,0,0,.55);
+  border-radius:18px;
+  border:1px solid #4fd1ff;
+  box-shadow:0 4px 25px rgba(0,0,0,0.6);
+}
+.frame h2{color:#4fd1ff;margin-bottom:12px}
+.frame p{color:#e0f7ff;line-height:1.6;margin-bottom:15px}
+.frame ul{
+  padding-left:18px;
+  line-height:1.6;
+  font-size:15px;
+  color:#a0e7ff;
+  margin-bottom:20px;
+}
+
+/* CONTENT IMAGE CONTAINER & INTERACTIVE VIEWER */
+.content-img-container{
+  text-align:center;
+  margin:20px 0;
+}
+
+.viewer-toolbar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.viewer-toolbar button {
+  padding: 8px 14px;
+  background: rgba(79, 209, 255, 0.15);
+  border: 1px solid #4fd1ff;
+  color: #4fd1ff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.viewer-toolbar button:hover, .viewer-toolbar button.active {
+  background: #4fd1ff;
+  color: #000;
+  box-shadow: 0 0 10px rgba(79, 209, 255, 0.6);
+}
+
+.canvas-wrapper {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  border-radius: 14px;
+  border: 1px solid #4fd1ff;
+  box-shadow: 0 0 20px rgba(79,209,255,.4);
+  overflow: hidden;
+  background: #111;
+  cursor: grab;
+  touch-action: none;
+}
+
+.canvas-wrapper:active {
+  cursor: grabbing;
+}
+
+.canvas-inner {
+  position: relative;
+  transform-origin: 0 0;
+  will-change: transform;
+  display: block;
+}
+
+.canvas-wrapper img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+.canvas-wrapper canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: auto;
+}
+
+/* HOME BUTTON STYLE */
+.home-btn-container{
+  margin-top:20px;
+}
+.home-btn{
+  padding:12px 24px;
+  background:#4fd1ff;
+  color:#000;
+  border:none;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.3s;
+  font-size:15px;
+}
+.home-btn:hover{
+  background:#00b3cc;
+  box-shadow:0 0 15px rgba(79,209,255,.8);
+}
+
+footer{
+  margin-top:40px;
+  padding:20px;
+  text-align:center;
+  background:rgba(0,0,0,.75);
+  border-top:1px solid #4fd1ff;
+}
+.footer-content{
+  color:#9ddcff;
+  font-size:14px;
+  line-height:1.6;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="left">
+    <img src="https://image2url.com/r2/default/images/1769014503355-aed3a663-edee-4712-974b-a5aa8787a845.png" alt="Logo">
+    <h1>CEFR <small>Common European Framework of Reference for Languages</small></h1>
+  </div>
+</header>
+
+<nav>
+  <button onclick="location.href='index.html#aboutCEFR'">The 6 Levels of CEFR</button>
+  <button onclick="location.href='index.html#aboutSystem'">About CEFR System</button>
+  <button onclick="location.href='index.html#categories'">CEFR & Reading Topics</button>
+</nav>
+
+<!-- VOCABULARY IN CONTEXT MODULE PAGE -->
+<section class="frame">
+  <h2>Vocabulary in Context</h2>
+  <p><b>Definition:</b> Inferring the meaning of unfamiliar words, technical terms, or idiomatic expressions by analyzing surrounding textual cues, sentence structures, and overall passage themes under CEFR methodology.</p>
+  
+  <div class="content-img-container">
+    <div class="viewer-toolbar">
+      <button id="modePanBtn" class="active" onclick="setInteractionMode('pan')">🖐️ Pan & Zoom Mode</button>
+      <button id="modeDrawBtn" onclick="setInteractionMode('draw')">✏️ Draw / Highlight Mode</button>
+      <button onclick="zoomIn()">➕ Zoom In</button>
+      <button onclick="zoomOut()">➖ Zoom Out</button>
+      <button onclick="resetView()">🔄 Reset View</button>
+      <button onclick="clearCanvas()">🗑️ Clear Markings</button>
+    </div>
+
+    <div class="canvas-wrapper" id="canvasWrapper">
+      <div class="canvas-inner" id="canvasInner">
+        <img id="sourceImage" src="https://www.image2url.com/r2/default/images/1786501937027-0fb70481-699e-4f4e-8491-2faf69b630d7.png" alt="Vocabulary in Context Visual Diagram">
+        <canvas id="drawCanvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <p><b>Core Methods & Overview:</b></p>
+  <ul>
+    <li><b>Context Clue Analysis:</b> Identifying synonyms, antonyms, definition markers, and explanatory examples embedded directly within sentences.</li>
+    <li><b>Structural Inference:</b> Decoding root words, prefixes, suffixes, and grammatical roles to deduce functional word meanings.</li>
+    <li><b>CEFR Focus:</b> Aligns with progressive proficiency levels to help students decode high-frequency and academic vocabulary without constant dictionary dependence.</li>
+  </ul>
+
+  <p><b>Learning Outcome:</b> <span style="color:#e0f7ff;">Student effectively decodes and comprehends unfamiliar words and specialized terms using contextual clues and structural text analysis.</span></p>
+
+  <div class="home-btn-container">
+    <button class="home-btn" onclick="location.href='index.html'">🏠 Back to Home</button>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="footer-content">
+    <p>
+      &copy; 2026 Common European Framework of Reference for Languages (CEFR) &mdash; All Rights Reserved.
+      <br>
+      CEFR Training and Learning Management System
+    </p>
+    <p>
+      👁️ Total Visits: <span id="visitCount">0</span>
+    </p>
+  </div>
+</footer>
+
+<script>
+// VISIT COUNTER
+let visits = localStorage.getItem("visitCount");
+visits = visits ? parseInt(visits) + 1 : 1;
+localStorage.setItem("visitCount", visits);
+document.getElementById("visitCount").innerText = visits;
+
+// ZOOM, PAN, AND DRAW INTERACTION LOGIC
+const wrapper = document.getElementById('canvasWrapper');
+const inner = document.getElementById('canvasInner');
+const img = document.getElementById('sourceImage');
+const canvas = document.getElementById('drawCanvas');
+const ctx = canvas.getContext('2d');
+
+let scale = 1;
+let panX = 0;
+let panY = 0;
+let isDragging = false;
+let startX = 0;
+let startY = 0;
+let mode = 'pan'; // 'pan' or 'draw'
+let isDrawing = false;
+let lastX = 0;
+let lastY = 0;
+
+function initCanvasSize() {
+  canvas.width = img.naturalWidth || img.width;
+  canvas.height = img.naturalHeight || img.height;
+  canvas.style.width = '100%';
+  canvas.style.height = '100%';
+  redrawCanvas();
+}
+
+if (img.complete) {
+  initCanvasSize();
+} else {
+  img.onload = initCanvasSize;
+}
+
+function updateTransform() {
+  inner.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
+}
+
+function setInteractionMode(newMode) {
+  mode = newMode;
+  document.getElementById('modePanBtn').classList.toggle('active', mode === 'pan');
+  document.getElementById('modeDrawBtn').classList.toggle('active', mode === 'draw');
+  wrapper.style.cursor = mode === 'pan' ? 'grab' : 'crosshair';
+}
+
+function zoomIn() {
+  scale = Math.min(scale * 1.25, 5);
+  updateTransform();
+}
+
+function zoomOut() {
+  scale = Math.max(scale / 1.25, 1);
+  if (scale === 1) { panX = 0; panY = 0; }
+  updateTransform();
+}
+
+function resetView() {
+  scale = 1;
+  panX = 0;
+  panY = 0;
+  updateTransform();
+}
+
+function clearCanvas() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+// Mouse Wheel Zoom
+wrapper.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  const rect = wrapper.getBoundingClientRect();
+  const mouseX = e.clientX - rect.left;
+  const mouseY = e.clientY - rect.top;
+
+  const zoomFactor = e.deltaY < 0 ? 1.15 : 1/1.15;
+  const newScale = Math.max(1, Math.min(scale * zoomFactor, 5));
+  
+  if (newScale === 1) {
+    panX = 0;
+    panY = 0;
+  } else {
+    panX = mouseX - (mouseX - panX) * (newScale / scale);
+    panY = mouseY - (mouseY - panY) * (newScale / scale);
+  }
+  scale = newScale;
+  updateTransform();
+}, { passive: false });
+
+// Pointer Events for Pan & Draw Handling
+wrapper.addEventListener('pointerdown', (e) => {
+  if (e.button !== 0) return; // Left click only
+  if (mode === 'pan') {
+    isDragging = true;
+    startX = e.clientX - panX;
+    startY = e.clientY - panY;
+    wrapper.style.cursor = 'grabbing';
+  } else if (mode === 'draw') {
+    isDrawing = true;
+    const rect = canvas.getBoundingClientRect();
+    lastX = (e.clientX - rect.left) * (canvas.width / rect.width);
+    lastY = (e.clientY - rect.top) * (canvas.height / rect.height);
+  }
+});
+
+window.addEventListener('pointermove', (e) => {
+  if (isDragging && mode === 'pan') {
+    panX = e.clientX - startX;
+    panY = e.clientY - startY;
+    updateTransform();
+  } else if (isDrawing && mode === 'draw') {
+    const rect = canvas.getBoundingClientRect();
+    const currentX = (e.clientX - rect.left) * (canvas.width / rect.width);
+    const currentY = (e.clientY - rect.top) * (canvas.height / rect.height);
+
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(currentX, currentY);
+    ctx.strokeStyle = 'rgba(255, 235, 59, 0.65)'; // Highlight yellow color
+    ctx.lineWidth = 14;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.stroke();
+
+    lastX = currentX;
+    lastY = currentY;
+  }
+});
+
+window.addEventListener('pointerup', () => {
+  if (isDragging) {
+    isDragging = false;
+    if (mode === 'pan') wrapper.style.cursor = 'grab';
+  }
+  if (isDrawing) {
+    isDrawing = false;
+  }
+});
+
+function redrawCanvas() {
+  // Retains markings context state across resizes if needed
+}
+</script>
+
+</body>
+</html>

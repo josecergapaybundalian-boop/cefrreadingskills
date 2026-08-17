@@ -1,0 +1,548 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CEFR | Common European Framework of Reference for Languages</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",Arial}
+body{
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color:#e8f6ff;
+}
+
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 28px;
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(12px);
+}
+header .left{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+header img{height:70px}
+header h1{color:#4fd1ff;font-size:22px}
+header h1 small{font-size:13px;color:#a0e7ff;font-weight:normal;display:block;margin-top:2px;}
+
+/* NAV */
+nav{
+  text-align:center;
+  padding:12px;
+  background:rgba(0,0,0,.55);
+}
+nav button{
+  width:190px;
+  margin:6px;
+  padding:10px;
+  border-radius:14px;
+  border:1px solid #4fd1ff;
+  background:transparent;
+  color:#4fd1ff;
+  cursor:pointer;
+  transition:.3s;
+}
+nav button:hover{
+  background:#4fd1ff;
+  color:#000;
+}
+
+/* FRAME */
+.frame{
+  max-width:1200px;
+  margin:30px auto;
+  padding:26px;
+  background:rgba(0,0,0,.55);
+  border-radius:18px;
+  border:1px solid #4fd1ff;
+  box-shadow:0 4px 25px rgba(0,0,0,0.6);
+}
+.frame h2{color:#4fd1ff;margin-bottom:12px}
+.frame p{color:#e0f7ff;line-height:1.6;margin-bottom:15px}
+
+/* SLIDER */
+.slider{
+  overflow:hidden;
+  position:relative;
+  margin-top:12px;
+}
+.slider-track{
+  display:flex;
+  width:max-content;
+  animation:scroll 30s linear infinite;
+}
+.slider img{
+  width:320px;
+  height:190px;
+  object-fit:cover;
+  border-radius:14px;
+  margin-right:12px;
+  border:1px solid #4fd1ff;
+}
+@keyframes scroll{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+
+/* CARDS */
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:20px;
+}
+.card{
+  background:rgba(0,0,0,.6);
+  border:1px solid #4fd1ff;
+  border-radius:16px;
+  overflow:hidden;
+  cursor:pointer;
+  height:260px;
+  box-shadow:0 0 16px rgba(79,209,255,.4);
+  transition:.3s;
+}
+.card:hover{
+  transform:translateY(-6px) scale(1.04);
+  box-shadow:0 0 34px rgba(79,209,255,.9);
+}
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+.card h3{
+  text-align:center;
+  padding:12px;
+  color:#4fd1ff;
+  font-size:15px;
+}
+
+/* MODAL */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  z-index:999;
+}
+.modal-content{
+  max-width:900px;
+  margin:70px auto;
+  background:#081a2c;
+  border-radius:20px;
+  display:flex;
+  overflow:hidden;
+  border:1px solid #4fd1ff;
+  position:relative;
+}
+.modal-content img{
+  width:45%;
+  object-fit:cover;
+}
+.modal-details{
+  width:55%;
+  padding:24px;
+  max-height:80vh;
+  overflow-y:auto;
+}
+.modal-details h2{color:#4fd1ff;margin-bottom:10px;}
+.modal-details p{margin-bottom:10px;font-size:14px;color:#d0f2ff;}
+.modal-details ul{
+  padding-left:18px;
+  line-height:1.6;
+  font-size:14px;
+  color:#a0e7ff;
+  margin-bottom:15px;
+}
+.modal-details button{
+  margin-top:14px;
+  padding:10px 20px;
+  background:#4fd1ff;
+  color:#000;
+  border:none;
+  border-radius:6px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.modal-details button:hover{background:#00b3cc;}
+.close{
+  position:absolute;
+  top:20px;
+  right:30px;
+  font-size:26px;
+  cursor:pointer;
+  color:#ff4d4d;
+  font-weight:bold;
+  z-index:10;
+}
+
+footer{
+  margin-top:40px;
+  padding:20px;
+  text-align:center;
+  background:rgba(0,0,0,.75);
+  border-top:1px solid #4fd1ff;
+}
+.footer-content{
+  color:#9ddcff;
+  font-size:14px;
+  line-height:1.6;
+}
+
+.globe-container{
+  display:flex;
+  justify-content:center;
+  margin-top:14px;
+}
+.globe-spin{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  animation:spin 6s linear infinite;
+  box-shadow:0 0 20px rgba(79,209,255,.6);
+}
+@keyframes spin{
+  from{ transform:rotate(0deg); }
+  to{ transform:rotate(360deg); }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="left">
+    <img src="https://image2url.com/r2/default/images/1769014503355-aed3a663-edee-4712-974b-a5aa8787a845.png" alt="Logo">
+    <h1>CEFR <small>Common European Framework of Reference for Languages</small></h1>
+  </div>
+</header>
+
+<nav>
+  <button onclick="go('aboutCEFR')">The 6 Levels of CEFR</button>
+  <button onclick="go('aboutSystem')">About CEFR System</button>
+  <button onclick="go('categories')">CEFR & Reading Topics</button>
+</nav>
+
+<!-- THE 6 LEVELS OF CEFR -->
+<section class="frame" id="aboutCEFR">
+<h2>The 6 Levels of CEFR</h2>
+<p>The Common European Framework of Reference for Languages (CEFR) divides learners into three broad divisions (A, B, and C), which can be further divided into six levels: A1, A2, B1, B2, C1, and C2 to measure language proficiency accurately.</p>
+<div class="slider">
+  <div class="slider-track">
+    <img src="https://www.image2url.com/r2/default/images/1786553263279-2cf05f07-7c35-4e34-81ae-3e94072c7eeb.png" alt="Level A1">
+    <img src="https://www.image2url.com/r2/default/images/1786553518279-325d37af-55f8-46ba-b5a4-240f1da0fe65.png" alt="Level A2">
+    <img src="https://www.image2url.com/r2/default/images/1786553718742-27c692a4-5947-4156-8607-b7444870a99d.png" alt="Level B1">
+    <img src="https://www.image2url.com/r2/default/images/1786553915530-d30aa9db-1b44-4866-843d-bd1ca7b9e512.png" alt="Level B2">
+    <img src="https://www.image2url.com/r2/default/images/1786554092276-aeb17bb1-b23c-4d6d-a26d-2ce27393a70f.png" alt="Level C1">
+    <img src="https://www.image2url.com/r2/default/images/1786583297233-6dc1e3c5-971b-4e94-90b1-a268e87e4342.png" alt="Level C2">
+    <img src="https://www.image2url.com/r2/default/images/1786583378660-b79fcd3c-c082-4298-9e0b-b8b3c8be6b12.png" alt="Level A1">
+  </div>
+</div>
+</section>
+
+<!-- ABOUT SYSTEM -->
+<section class="frame" id="aboutSystem">
+<h2>About the CEFR Training & Learning System</h2>
+<p>This system allows students and faculty to explore international language standards, build core reading competencies, and track progress effectively.</p>
+<div class="slider">
+  <div class="slider-track">
+    <img src="https://www.image2url.com/r2/default/images/1786590815444-ccfc13aa-c275-4b0e-a911-147107b06205.png" alt="CEFR 1">
+    <img src="https://www.image2url.com/r2/default/images/1786590350496-8e120a41-5c49-4e77-9267-39b049126649.png" alt="Reading 2">
+    <img src="https://www.image2url.com/r2/default/images/1786593783081-424f1c20-88f2-4851-9d7c-395fedd1e12c.png" alt="Reading 3">
+    <img src="https://www.image2url.com/r2/default/images/1786594107228-ca71fb86-7391-404a-9eb4-2e21e3498a72.png" alt="Reading 4">
+    <img src="https://www.image2url.com/r2/default/images/1786594656556-80141c38-e2b1-46aa-acb1-3ee4212c250d.png" alt="Reading 5">
+    <img src="https://www.image2url.com/r2/default/images/1786594968466-67e11dc9-61af-4fbd-b1e8-7a5cc8205163.png" alt="CEFR 1">
+    <img src="https://www.image2url.com/r2/default/images/1786525521899-316405b9-8705-492e-aa3a-d998879366d3.png" alt="Reading 2">
+  </div>
+</div>
+<div class="globe-container">
+  <img src="https://image2url.com/r2/default/images/1769014503355-aed3a663-edee-4712-974b-a5aa8787a845.png" class="globe-spin" alt="Spinning Globe">
+</div>
+</section>
+
+<!-- CATEGORIES (CEFR & Reading Sub-Topics using Frames Layout) -->
+<section class="frame" id="categories">
+<h2>CEFR & Reading Skills Training Curriculum</h2>
+<p>Explore the core sub-topics designed to elevate reading performance and language comprehension under the Common European Framework of Reference for Languages.</p>
+<div class="cards-grid">
+
+<div class="card" onclick="openM('skimming')">
+<img src="https://www.image2url.com/r2/default/images/1786523878821-e9e5676a-101e-43d1-9b80-aae0e82817ef.png" alt="Skimming">
+<h3>1. Skimming and Scanning</h3>
+</div>
+
+<div class="card" onclick="openM('mainIdeas')">
+<img src="https://www.image2url.com/r2/default/images/1786524319725-06831d9b-f797-4c04-a854-8382c87864dd.png" alt="Main Ideas">
+<h3>2. Finding Main Ideas & Details</h3>
+</div>
+
+<div class="card" onclick="openM('vocabulary')">
+<img src="https://www.image2url.com/r2/default/images/1786524765647-e209ea66-66ad-409b-b8f0-7acd339042ae.png" alt="Vocabulary">
+<h3>3. Vocabulary in Context</h3>
+</div>
+
+<div class="card" onclick="openM('factOpinion')">
+<img src="https://www.image2url.com/r2/default/images/1786524953208-bcbe7221-c62b-416a-935c-e8adb4da5373.png" alt="Fact vs Opinion">
+<h3>4. Fact vs. Opinion</h3>
+</div>
+
+<div class="card" onclick="openM('inferences')">
+<img src="https://www.image2url.com/r2/default/images/1786525178929-9649ef07-b302-4550-ab1d-63655398ee1a.png" alt="Inferences">
+<h3>5. Making Inferences</h3>
+</div>
+
+<div class="card" onclick="openM('purposeTone')">
+<img src="https://www.image2url.com/r2/default/images/1786525521899-316405b9-8705-492e-aa3a-d998879366d3.png" alt="Purpose and Tone">
+<h3>6. Author's Purpose and Tone</h3>
+</div>
+
+<div class="card" onclick="openM('workplace')">
+<img src="https://www.image2url.com/r2/default/images/1786525774236-b318c36e-4a7d-47ff-aa27-3a384a7893a2.png" alt="Workplace Texts">
+<h3>7. Workplace and Everyday Texts</h3>
+</div>
+
+<div class="card" onclick="openM('summarizing')">
+<img src="https://www.image2url.com/r2/default/images/1786526014859-db227f8e-6862-4a3d-8734-68b61d7a8702.png" alt="Summarizing">
+<h3>8. Summarizing a Text</h3>
+</div>
+
+<div class="card" onclick="openM('comparing')">
+<img src="https://www.image2url.com/r2/default/images/1786550602002-c14f8c28-1fdb-41a6-9aaa-6202b95572b8.png" alt="Comparing">
+<h3>9. Comparing Two Texts</h3>
+</div>
+
+<div class="card" onclick="openM('critical')">
+<img src="https://www.image2url.com/r2/default/images/1786551875823-409ea568-5d19-4544-8427-9522bb4c17c4.png" alt="Critical Reading">
+<h3>10. Critical Reading & Evaluation</h3>
+</div>
+
+<div class="card" onclick="openM('postTest')">
+<img src="https://www.image2url.com/r2/default/images/1786586622208-8ce823d7-467b-494e-bf33-956457756097.png" alt="Post Test">
+<h3>11. Post Test for Reading Skills</h3>
+</div>
+
+<div class="card" onclick="openM('certificate')">
+<img src="https://www.image2url.com/r2/default/images/1786552858227-38930b6f-95c8-4629-a588-1a0064175b27.png" alt="Certificate">
+<h3>12. Download PDF & Certificate</h3>
+</div>
+
+</div>
+</section>
+
+<!-- MODAL POPUP -->
+<div id="modal" class="modal">
+  <span class="close" onclick="closeModal()">✖</span>
+  <div class="modal-content">
+    <img id="modalImg" src="" alt="Topic Visual">
+    <div class="modal-details">
+      <h2 id="modalTitle"></h2>
+      <p><b>Definition:</b> <span id="modalDesc"></span></p>
+      <p><b>Methods & Overview:</b></p>
+      <ul id="modalList"></ul>
+      <p><b>Learning Outcome:</b> <span id="modalOutcome"></span></p>
+      <button id="modalLearnMoreBtn">Learn More</button>
+    </div>
+  </div>
+</div>
+<footer id="footer">
+  <div class="footer-content">
+    <p>
+      &copy; 2026 Common European Framework of Reference for Languages (CEFR) &mdash; All Rights Reserved.
+      <br>
+      CEFR Training and Learning Management System
+    </p>
+    <p>
+      👁️ Total Visits: <span id="visitCount">0</span>
+    </p>
+  </div>
+</footer>
+
+<script>
+function go(id){document.getElementById(id).scrollIntoView({behavior:"smooth"})}
+
+// VISIT COUNTER
+let visits = localStorage.getItem("visitCount");
+visits = visits ? parseInt(visits) + 1 : 1;
+localStorage.setItem("visitCount", visits);
+document.getElementById("visitCount").innerText = visits;
+
+const modalData = {
+  skimming:{
+    title:"1. Skimming and Scanning",
+    img:"https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=600&q=80",
+    desc:"Rapidly glancing over text to get a general overview vs looking for specific targeted information.",
+    list:[
+      "Eye tracking across headings and bullet points",
+      "Scanning keywords and numbers",
+      "Looking up specific data points quickly"
+    ],
+    outcome:"Student can extract core content within seconds.",
+    link:"skimming.html"
+  },
+  mainIdeas:{
+    title:"2. Finding Main Ideas and Supporting Details",
+    img:"https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=600&q=80",
+    desc:"Identifying the central thesis statement and the evidence or arguments backing it up.",
+    list:[
+      "Locating topic sentences in opening paragraphs",
+      "Differentiating core arguments from trivial details",
+      "Spotting supporting examples in body paragraphs"
+    ],
+    outcome:"Student separates core themes from trivia.",
+    link:"mainideas.html"
+  },
+  vocabulary:{
+    title:"3. Vocabulary in Context",
+    img:"https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=600&q=80",
+    desc:"Deducing unfamiliar word meanings using surrounding sentence clues.",
+    list:[
+      "Analyzing punctuation signals and antonyms",
+      "Recognizing contextual synonyms",
+      "Building lexical guessing strategies"
+    ],
+    outcome:"Student builds contextual lexical fluency.",
+    link:"vocabularyincontext.html"
+  },
+  factOpinion:{
+    title:"4. Fact vs. Opinion",
+    img:"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80",
+    desc:"Distinguishing objective verifiable data from personal beliefs or judgments.",
+    list:[
+      "Checking statements for statistics or verifiable evidence",
+      "Identifying subjective language markers",
+      "Evaluating claims critically"
+    ],
+    outcome:"Student enhances critical informational analysis.",
+    link:"factvsopinion.html"
+  },
+  inferences:{
+    title:"5. Making Inferences",
+    img:"https://www.image2url.com/r2/default/images/1786590350496-8e120a41-5c49-4e77-9267-39b049126649.png",
+    desc:"Drawing logical conclusions based on indirect textual hints.",
+    list:[
+      "Combining text clues with background reasoning",
+      "Reading between the lines of passages",
+      "Deducing unspoken author implications"
+    ],
+    outcome:"Student reads between the lines effectively.",
+    link:"inferences.html"
+  },
+  purposeTone:{
+    title:"6. Author's Purpose and Tone",
+    img:"https://www.image2url.com/r2/default/images/1786590815444-ccfc13aa-c275-4b0e-a911-147107b06205.png",
+    desc:"Determining why an author wrote a text and their emotional attitude.",
+    list:[
+      "Analyzing diction and stylistic choices",
+      "Recognizing expressive vocabulary and mood",
+      "Identifying persuasive or sarcastic intent"
+    ],
+    outcome:"Student interprets authorial intent accurately.",
+    link:"purposetone.html"
+  },
+  workplace:{
+    title:"7. Reading Workplace and Everyday Texts",
+    img:"https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80",
+    desc:"Interpreting emails, memos, schedules, and instructional manuals.",
+    list:[
+      "Scanning message headers and timeline deadlines",
+      "Following procedural bullet action lists",
+      "Reviewing compliance guidelines"
+    ],
+    outcome:"Student masters practical professional literacy.",
+    link:"workplacetexts.html"
+  },
+  summarizing:{
+    title:"8. Summarizing a Text",
+    img:"https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80",
+    desc:"Condensing major arguments into concise independent statements.",
+    list:[
+      "Filtering out minor details while retaining essential plot points",
+      "Synthesizing arguments into short summaries",
+      "Writing concise reviews"
+    ],
+    outcome:"Student synthesizes information succinctly.",
+    link:"summarizing.html"
+  },
+  comparing:{
+    title:"9. Comparing Two Texts",
+    img:"https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=600&q=80",
+    desc:"Juxtaposing parallel or contrasting perspectives on a single topic.",
+    list:[
+      "Creating comparison matrices for arguments",
+      "Analyzing differences in tone and evidence",
+      "Evaluating dual perspectives"
+    ],
+    outcome:"Student builds multi-textual analytical skills.",
+    link:"comparingtexts.html"
+  },
+  critical:{
+    title:"10. Critical Reading and Evaluation",
+    img:"https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=600&q=80",
+    desc:"Assessing argument validity, logic flaws, and evidence strength.",
+    list:[
+      "Testing assertions against logical fallacies",
+      "Verifying data sources and reliability",
+      "Evaluating journal credibility"
+    ],
+    outcome:"Student develops advanced skeptical literacy.",
+    link:"criticalreading.html"
+  },
+  postTest:{
+    title:"11. Post Test for Reading Skills",
+    img:"https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80",
+    desc:"Comprehensive evaluation assessing all learned CEFR tiers.",
+    list:[
+      "Timed structured reading examination",
+      "Multi-level passage comprehension checks",
+      "Proficiency metric scoring"
+    ],
+    outcome:"Student measures overall training performance.",
+    link:"posttest.html"
+  },
+  certificate:{
+    title:"12. Download PDF and Certificate",
+    img:"https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&w=600&q=80",
+    desc:"Retrieving official documentation and performance summary records.",
+    list:[
+      "Generating printable certification assets",
+      "Exporting database metrics and transcripts",
+      "Downloading signed completion credentials"
+    ],
+    outcome:"Student receives verified credential records.",
+    link:"certificate.html"
+  }
+};
+
+function openM(key){
+  const d = modalData[key];
+  const modal = document.getElementById("modal");
+  document.getElementById("modalImg").src = d.img;
+  document.getElementById("modalTitle").innerText = d.title;
+  document.getElementById("modalDesc").innerText = d.desc;
+  document.getElementById("modalOutcome").innerText = d.outcome;
+  
+  const listEl = document.getElementById("modalList");
+  listEl.innerHTML="";
+  d.list.forEach(i=>{
+    let li=document.createElement("li");
+    li.innerText=i;
+    listEl.appendChild(li);
+  });
+  
+  // Update the Learn More button click action dynamically
+  document.getElementById("modalLearnMoreBtn").setAttribute("onclick", `location.href='${d.link}'`);
+  
+  modal.style.display="block";
+}
+
+function closeModal(){
+  document.getElementById("modal").style.display="none";
+}
+</script>
+
+</body>
+</html>

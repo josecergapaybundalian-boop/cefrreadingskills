@@ -1,0 +1,339 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Official CEFR Reading Skills Certificate</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #eef2f5;
+    color: #1a252f;
+    padding: 30px 15px;
+}
+
+.action-bar {
+    max-width: 1000px;
+    margin: 0 auto 20px auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-left: 8px;
+}
+
+.btn-home { background: #34495e; color: #fff; text-decoration: none; display: inline-block; }
+.btn-primary { background: #0056b3; color: #fff; }
+.btn-success { background: #27ae60; color: #fff; }
+.btn-warning { background: #dfa714; color: #000; }
+.btn-secondary { background: #7f8c8d; color: #fff; }
+.btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+/* CERTIFICATE STYLES */
+.cert-card {
+    max-width: 1000px;
+    margin: 0 auto 40px auto;
+    background: #ffffff;
+    border: 16px solid #0f2027;
+    outline: 5px solid #dfa714;
+    padding: 50px;
+    position: relative;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.18);
+    border-radius: 4px;
+    background-image: 
+        radial-gradient(circle at 50% 50%, rgba(243, 156, 18, 0.03) 0%, transparent 70%),
+        linear-gradient(to right, rgba(15, 32, 39, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15, 32, 39, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 20px 20px, 20px 20px;
+}
+
+.cert-corner {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 3px solid #dfa714;
+}
+.corner-tl { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.corner-tr { top: 10px; right: 10px; border-left: none; border-bottom: none; }
+.corner-bl { bottom: 10px; left: 10px; border-right: none; border-top: none; }
+.corner-br { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+.cert-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px double #dfa714;
+    padding-bottom: 25px;
+    margin-bottom: 30px;
+}
+
+.cert-header img { width: 110px; height: auto; }
+
+.cert-header-title { text-align: center; flex-grow: 1; }
+.cert-header-title h2 { margin: 0; color: #0f2027; font-size: 28px; letter-spacing: 1px; text-transform: uppercase; font-family: 'Georgia', serif; }
+.cert-header-title h4 { margin: 6px 0 0 0; color: #b8860b; font-size: 18px; font-weight: 700; }
+
+.cert-body { text-align: center; }
+.cert-title { font-size: 36px; font-weight: bold; color: #0f2027; letter-spacing: 4px; margin-bottom: 10px; text-transform: uppercase; font-family: 'Georgia', serif; }
+.cert-subtitle { font-size: 15px; color: #7f8c8d; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; }
+
+.student-name {
+    font-size: 34px;
+    font-weight: bold;
+    color: #0056b3;
+    font-family: 'Georgia', serif;
+    border-bottom: 2px solid #dfa714;
+    display: inline-block;
+    padding: 0 30px 5px 30px;
+    margin: 10px 0 15px 0;
+}
+
+.cert-grid {
+    display: flex;
+    justify-content: space-around;
+    background: linear-gradient(135deg, #f8f9fa, #eef2f5);
+    border: 1px solid #dcdfe6;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 25px 0;
+}
+
+.cert-grid-item label { font-size: 12px; color: #7f8c8d; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 5px; }
+.cert-grid-item span { font-size: 22px; font-weight: bold; color: #0f2027; }
+
+.appreciation-box {
+    background: #eef9f5;
+    border-left: 6px solid #27ae60;
+    padding: 20px;
+    text-align: left;
+    margin: 25px 0;
+    border-radius: 6px;
+}
+.appreciation-box.retake-recommended { background: #fdf2e9; border-left-color: #e67e22; }
+
+.cert-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 45px;
+    padding-top: 25px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.sig-block { text-align: center; width: 280px; }
+.auto-signature { font-family: 'Brush Script MT', 'Great Vibes', cursive; font-size: 36px; color: #0f2027; border-bottom: 1px solid #333; padding-bottom: 2px; margin-bottom: 6px; }
+
+.cefr-badge-container { display: flex; gap: 8px; justify-content: center; margin-top: 20px; }
+.cefr-badge { padding: 8px 16px; font-weight: bold; border-radius: 20px; background: #e0e0e0; color: #777; font-size: 13px; border: 1px solid #ccc; }
+.cefr-badge.active { background: #0f2027; color: #ffc107; border: 2px solid #dfa714; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+
+/* TEST SUMMARY REVIEW CONTAINER */
+.test-pdf-container {
+    max-width: 1000px;
+    margin: 0 auto 50px auto;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.test-pdf-container h2 {
+    color: #0f2027;
+    border-bottom: 2px solid #0056b3;
+    padding-bottom: 8px;
+}
+
+/* PRINT MEDIA CONTROLS */
+@media print {
+    body { background: #fff !important; padding: 0 !important; }
+    .no-print { display: none !important; }
+    
+    /* Print Certificate Only */
+    body.print-cert-only .test-pdf-container { display: none !important; }
+    
+    /* Print Test Only */
+    body.print-test-only .cert-card { display: none !important; }
+    
+    .cert-card { border: 8px solid #0f2027 !important; box-shadow: none !important; page-break-after: always; }
+    .test-pdf-container { box-shadow: none !important; padding: 0 !important; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="action-bar no-print">
+    <div>
+        <button class="btn btn-home" onclick="window.location.href='index.html'">⌂ Home</button>
+        <button class="btn btn-secondary" onclick="window.location.href='posttest.html'">← Back to Examination</button>
+    </div>
+    <div>
+        <button class="btn btn-warning" onclick="downloadCertificatePDF()">Download Certificate PDF</button>
+        <button class="btn btn-primary" onclick="downloadTestPDF()">Download Test PDF</button>
+        <button class="btn btn-success" onclick="downloadBothPDF()">Download Both (Cert + Test)</button>
+    </div>
+</div>
+
+<!-- CERTIFICATE VIEW -->
+<div class="cert-card" id="certCard">
+    <div class="cert-corner corner-tl"></div>
+    <div class="cert-corner corner-tr"></div>
+    <div class="cert-corner corner-bl"></div>
+    <div class="cert-corner corner-br"></div>
+
+    <div class="cert-header">
+        <img src="https://image2url.com/r2/default/images/1769014503355-aed3a663-edee-4712-974b-a5aa8787a845.png" alt="School Logo">
+        <div class="cert-header-title">
+            <h2>Chumphon Vocational College</h2>
+            <h4>General Relations Department</h4>
+            <p style="margin:4px 0 0 0; font-size:12px; color:#666; letter-spacing:1px; text-transform:uppercase;">Official Reading Proficiency Assessment</p>
+        </div>
+        <div style="width: 110px;"></div>
+    </div>
+
+    <div class="cert-body">
+        <div class="cert-title">Certificate of Achievement</div>
+        <div class="cert-subtitle">CEFR Reading Proficiency Standards</div>
+        <p style="font-size:16px;">This official document certifies that</p>
+        <div class="student-name" id="certStudentName">STUDENT NAME</div>
+        <p style="margin:5px 0 20px 0; font-size:15px;">Student ID: <b id="certStudentID">N/A</b> &nbsp;|&nbsp; Department: <b id="certDept">N/A</b></p>
+        <p style="max-width:750px; margin:auto; font-size:15px; line-height:1.6; color:#333;">has successfully undertaken the comprehensive 60-item <b>CEFR Reading Skills Examination</b> and demonstrated reading proficiency corresponding to the standard benchmark detailed below:</p>
+
+        <div class="cert-grid">
+            <div class="cert-grid-item">
+                <label>Raw Exam Score</label>
+                <span id="certRawScore">0 / 60</span>
+            </div>
+            <div class="cert-grid-item">
+                <label>Percentage Score</label>
+                <span id="certPercentage">0%</span>
+            </div>
+            <div class="cert-grid-item">
+                <label>CEFR Reading Level</label>
+                <span id="certCEFRLevel" style="color:#b8860b;">-</span>
+            </div>
+        </div>
+
+        <div class="cefr-badge-container">
+            <div class="cefr-badge" id="badge-A1">A1 (1-11)</div>
+            <div class="cefr-badge" id="badge-A2">A2 (12-23)</div>
+            <div class="cefr-badge" id="badge-B1">B1 (24-35)</div>
+            <div class="cefr-badge" id="badge-B2">B2 (36-45)</div>
+            <div class="cefr-badge" id="badge-C1">C1 (46-53)</div>
+            <div class="cefr-badge" id="badge-C2">C2 (54-60)</div>
+        </div>
+
+        <div class="appreciation-box" id="certAppreciationBox">
+            <b id="certAppreciationTitle" style="font-size:16px;">Assessment Result:</b>
+            <p id="certAppreciationText" style="margin:8px 0 0 0; font-size:14px; line-height:1.5; color:#2c3e50;"></p>
+        </div>
+    </div>
+
+    <div class="cert-footer">
+        <div style="font-size:12px; color:#555; text-align:left;">
+            <p style="margin:3px 0;">Date Issued: <b id="certDate"></b></p>
+            <p style="margin:3px 0;">Serial Verification: <b>CVC-CEFR-2026-60I</b></p>
+            <p style="margin:3px 0; font-size:10px; color:#888;">Valid for Academic and Professional Reference</p>
+        </div>
+
+        <div class="sig-block">
+            <div class="auto-signature">J. C. G. Bundalian</div>
+            <div style="font-weight:bold; font-size:14px; color:#0f2027;" id="certTeacher">Mr. Jose Cer Gapay Bundalian</div>
+            <div style="font-size:12px; color:#666;">Course Instructor & Department Supervisor</div>
+        </div>
+    </div>
+</div>
+
+<!-- TEST RECORD REVIEW VIEW (Appears separately or on export) -->
+<div class="test-pdf-container" id="testContainer">
+    <h2>CEFR Examination Item Review & Saved Record</h2>
+    <div id="testInfoBlock" style="margin-bottom:20px; font-size:14px; line-height:1.6;"></div>
+    <div id="testReviewList"></div>
+</div>
+
+<script>
+// Load Saved Data from Local Storage
+window.addEventListener("DOMContentLoaded", () => {
+    const rawData = localStorage.getItem("cefrStudentResult");
+    if(!rawData) {
+        alert("No student exam records found. Please take the test first.");
+        window.location.href = "posttest.html";
+        return;
+    }
+
+    const data = JSON.parse(rawData);
+
+    // Fill Certificate Fields
+    document.getElementById("certStudentName").textContent = data.name;
+    document.getElementById("certStudentID").textContent = data.id;
+    document.getElementById("certDept").textContent = data.dept;
+    document.getElementById("certTeacher").textContent = data.teacher;
+    document.getElementById("certRawScore").textContent = `${data.rawScore} / 60`;
+    document.getElementById("certPercentage").textContent = `${data.percentage}%`;
+    document.getElementById("certCEFRLevel").textContent = data.cefrLevel;
+    document.getElementById("certDate").textContent = data.issueDate;
+
+    // Active Badge
+    document.querySelectorAll('.cefr-badge').forEach(b => b.classList.remove('active'));
+    const activeBadge = document.getElementById(`badge-${data.cefrLevel}`);
+    if(activeBadge) activeBadge.classList.add('active');
+
+    // Personalized Level Appreciation
+    const appBox = document.getElementById("certAppreciationBox");
+    const appTitle = document.getElementById("certAppreciationTitle");
+    const appText = document.getElementById("certAppreciationText");
+
+    if(data.cefrLevel === "A1" || data.cefrLevel === "A2") {
+        appBox.classList.add("retake-recommended");
+        appTitle.textContent = "Assessment Result: Foundational Progress (Retake Recommended)";
+        appText.textContent = `Thank you for completing the assessment, ${data.name}. You achieved level ${data.cefrLevel} (${data.percentage}%). You demonstrate initial recognition of basic vocabulary and short texts. To improve reading skills and reach independent standards (B1/B2), targeted practice is advised, followed by re-taking the CEFR test.`;
+    } else if(data.cefrLevel === "B1" || data.cefrLevel === "B2") {
+        appTitle.textContent = "Assessment Result: Independent User Competency (Good Job!)";
+        appText.textContent = `Great performance, ${data.name}! You achieved level ${data.cefrLevel} (${data.percentage}%). You show strong reading independence, comprehension of main ideas, and accurate information retrieval. Optional re-testing is available if you wish to target C1/C2 advanced proficiency.`;
+    } else {
+        appTitle.textContent = "Assessment Result: Mastery & Advanced Proficiency";
+        appText.textContent = `Outstanding achievement, ${data.name}! You attained level ${data.cefrLevel} (${data.percentage}%). You possess advanced analytical skills, fast skimming/scanning capability, and deep reading comprehension across complex, academic texts. No re-testing required.`;
+    }
+
+    // Populate Test PDF Review List
+    document.getElementById("testInfoBlock").innerHTML = `
+        Student Name: <b>${data.name}</b> | Student ID: <b>${data.id}</b> | Department: <b>${data.dept}</b><br>
+        Score Achieved: <b>${data.rawScore} / 60 (${data.percentage}%)</b> | Level: <b>${data.cefrLevel}</b> | Instructor: <b>${data.teacher}</b>
+    `;
+    document.getElementById("testReviewList").innerHTML = data.testReviewHtml || "<p>No test details recorded.</p>";
+});
+
+function downloadCertificatePDF() {
+    document.body.className = "print-cert-only";
+    window.print();
+    document.body.className = "";
+}
+
+function downloadTestPDF() {
+    document.body.className = "print-test-only";
+    window.print();
+    document.body.className = "";
+}
+
+function downloadBothPDF() {
+    document.body.className = "";
+    window.print();
+}
+</script>
+
+</body>
+</html>
